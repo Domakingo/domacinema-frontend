@@ -1,52 +1,65 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* DomaCinema Color Palette */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  /* Colori base */
+  --ct-c-dark: #0a0a0a;
+  --ct-c-primary: #1a1a24;
+  --ct-c-accent: #c19b6c;
+  --ct-c-secondary: #6d1a1a;
+  --ct-c-light: #e5e5e5;
+  --ct-c-screen: #2a3542;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  /* Sfumature per dark mode */
+  --ct-c-dark-soft: #1a1a1a;
+  --ct-c-dark-mute: #2a2a2a;
 
-  --vt-c-indigo: #2c3e50;
+  /* Sfumature per light mode */
+  --ct-c-light-soft: #f0f0f0;
+  --ct-c-light-mute: #d8d8d8;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  /* Elementi interattivi */
+  --ct-c-cta: #d32f2f;
+  --ct-c-cta-hover: #b71c1c;
+  --ct-c-success: #2e7d32;
+  --ct-c-warning: #ff8f00;
 }
 
-/* semantic color variables for this project */
+/* Variabili semantiche */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-background: var(--ct-c-light);
+  --color-background-soft: var(--ct-c-light-soft);
+  --color-background-mute: var(--ct-c-light-mute);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-border: var(--ct-c-primary);
+  --color-border-hover: var(--ct-c-accent);
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-heading: var(--ct-c-primary);
+  --color-text: var(--ct-c-dark);
+  --color-link: var(--ct-c-secondary);
 
-  --section-gap: 160px;
+  /* Elementi speciali */
+  --color-screen: var(--ct-c-screen);
+  --color-cta: var(--ct-c-cta);
+  --color-cta-hover: var(--ct-c-cta-hover);
+  --color-accent: var(--ct-c-accent);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: var(--ct-c-dark);
+    --color-background-soft: var(--ct-c-dark-soft);
+    --color-background-mute: var(--ct-c-dark-mute);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-border: var(--ct-c-accent);
+    --color-border-hover: var(--ct-c-secondary);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-heading: var(--ct-c-light);
+    --color-text: var(--ct-c-light);
+    --color-link: var(--ct-c-accent);
+
+    --color-screen: var(--ct-c-screen);
+    --color-cta: var(--ct-c-cta);
+    --color-cta-hover: var(--ct-c-cta-hover);
+    --color-accent: var(--ct-c-accent);
   }
 }
 
@@ -56,6 +69,23 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
