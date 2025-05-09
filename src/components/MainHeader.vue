@@ -12,15 +12,54 @@
       </div>
 
       <div class="header-side right">
-        <component :is="headerStore.rightContent" v-if="headerStore.rightContent" />
+        <BaseButton size="small" type="primary" @click="handleLogout">
+          <span class="logout-text">Esci</span>
+        </BaseButton>
+        <img :src="profileImage" alt="Profilo" class="profile-image" @error="handleImageError" />
       </div>
     </div>
   </header>
 </template>
 
 <script setup>
-import { useHeaderStore } from '@/stores/header'
-const headerStore = useHeaderStore()
+import { ref, onMounted, watch } from 'vue';
+import BaseButton from '@/components/BaseButton.vue';
+import { useAuthStore } from '@/stores/auth';
+import { useHeaderStore } from '@/stores/header';
+import placeholderImage from '@/assets/images/profile-placeholder.png';
+import api from '@/services/api';
+
+const authStore = useAuthStore();
+const headerStore = useHeaderStore();
+const profileImage = ref(placeholderImage);
+
+const loadProfileImage = async () => {
+  try {
+    if (authStore.isAuthenticated) {
+      const response = await api.get('/api/me/getPhotoUrl');
+
+      if (response.data.photoUrl) {
+        profileImage.value = response.data.photoUrl;
+      } else {
+        profileImage.value = placeholderImage;
+      }
+    }
+  } catch (error) {
+    console.error('Error loading profile image:', error);
+    profileImage.value = placeholderImage;
+  }
+};
+
+const handleImageError = () => {
+  profileImage.value = placeholderImage;
+};
+
+const handleLogout = () => {
+  authStore.logout();
+};
+
+onMounted(loadProfileImage);
+watch(() => authStore.user, loadProfileImage);
 </script>
 
 <style scoped>
@@ -59,6 +98,15 @@ const headerStore = useHeaderStore()
 
 .right {
   justify-content: flex-end;
+}
+
+.profile-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 15px;
+  border: 2px solid var(--color-border);
 }
 
 .logo {

@@ -33,7 +33,7 @@ defineEmits(['click']);
   border: none;
   border-radius: 2rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease-in;
   font-weight: 500;
   letter-spacing: 0.025em;
   white-space: nowrap;
@@ -41,7 +41,6 @@ defineEmits(['click']);
 
 :deep(.base-button) {
   line-height: 1.2;
-  /* Allineamento verticale preciso */
   vertical-align: middle;
 }
 
@@ -55,12 +54,14 @@ defineEmits(['click']);
   background: var(--button-primary);
   color: var(--color-background);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
 }
 
 .secondary {
   background: var(--button-secondary);
   color: var(--button-primary);
   border: 2px solid var(--button-primary);
+  margin: -2px;
 }
 
 .text {
@@ -86,18 +87,20 @@ defineEmits(['click']);
 }
 
 /* Stati interattivi */
-.base-button:not(.text):hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-}
-
-.base-button:active {
-  transform: translateY(0);
-  transition-duration: 0.1s;
+.primary:hover {
+  background: var(--button-secondary);
+  color: var(--button-primary);
+  border-color: var(--button-primary);
+  box-shadow: none;
+  transform: translateY(1px);
 }
 
 .secondary:hover {
-  background: rgba(193, 155, 108, 0.1);
+  background: var(--button-primary);
+  color: var(--color-background);
+  border-color: transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
 }
 
 .text:hover {

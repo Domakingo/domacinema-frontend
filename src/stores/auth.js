@@ -60,5 +60,11 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('jwt');
       router.push('/login');
     }
+  },
+
+  getters: {
+    isAuthenticated() {
+      return this.token !== null;
+    }
   }
 });
